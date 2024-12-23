@@ -4,11 +4,19 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const dotenv = require('dotenv');
 
+const userRouter = require('./routes/userRoutes');
+const productRouter = require('./routes/productRoutes');
+const cartRouter = require('./routes/cartRoutes');
+
 dotenv.config(); // This will load the environment variables from the .env file
 const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
+
+app.use('/users', userRouter);
+app.use('/products', productRouter);
+app.use('/cart', cartRouter);
 
 app.get('/', (req, res) => {
   res.json({ message: 'Hello from the backend!'});
